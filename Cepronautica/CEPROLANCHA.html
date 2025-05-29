@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CeproLancha - A Lancha dos Seus Sonhos</title>
+    <style>
+        :root {
+            --primary: #0066cc;
+            --secondary: #003366;
+            --accent: #ff9900;
+            --light: #f5f5f5;
+            --dark: #333333;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        a
+        {
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            background-color: #e29116;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h1
+        {
+            font-family:Verdana, Geneva, Tahoma, sans-serif;
+            color: #a7bfd6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-size: 0rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 1.5rem;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+        
+        .hero {
+            height: 80vh;
+            background: url("https://plus.unsplash.com/premium_photo-1675802755792-a7cfd346b5be?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D") no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 0.8rem 1.8rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.3s;
+        }
+        
+        .btn:hover {
+            background: #c46800;
+            transform: translateY(-3px);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin: 3rem 0;
+            font-size: 2.5rem;
+            color: var(--secondary);
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .feature {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .feature:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .feature h3 {
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+        
+        .product-showcase {
+            background: white;
+            padding: 4rem 0;
+        }
+        
+        .product-container {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 3rem;
+        }
+        
+        .product-image {
+            flex: 1;
+            min-width: 300px;
+            max-width: 600px;
+        }
+        
+        .product-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .product-details {
+            flex: 1;
+            min-width: 300px;
+            max-width: 500px;
+        }
+        
+        .product-details h2 {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .product-details .price {
+            font-size: 2rem;
+            color: var(--primary);
+            margin: 1.5rem 0;
+            font-weight: bold;
+        }
+        
+        .specs {
+            margin: 2rem 0;
+        }
+        
+        .spec-item {
+            display: flex;
+            margin-bottom: 1rem;
+        }
+        
+        .spec-item .spec-name {
+            font-weight: bold;
+            width: 150px;
+            color: var(--secondary);
+        }
+        
+        .spec-item .spec-value {
+            flex: 1;
+        }
+        
+        .testimonials {
+            background: var(--secondary);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .testimonial-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .testimonial {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 350px;
+            text-align: left;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+        
+        .testimonial-author {
+            font-weight: bold;
+        }
+        
+        .cta {
+            padding: 5rem 0;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+        
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .cta p {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            font-size: 1.2rem;
+        }
+        
+        /* Formulário de Cadastro */
+        .registration-form {
+            background: white;
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            max-width: 800px;
+            margin: 3rem auto;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: var(--secondary);
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        .form-actions {
+            text-align: center;
+            margin-top: 2rem;
+        }
+        
+        /* Tabela de Clientes */
+        .customers-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 3rem 0;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .customers-table th,
+        .customers-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .customers-table th {
+            background: var(--secondary);
+            color: white;
+        }
+        
+        .customers-table tr:hover {
+            background: #f9f9f9;
+        }
+        
+        .admin-section {
+            padding: 4rem 0;
+        }
+        
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 0 1rem;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-section ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-section ul li a:hover {
+            color: var(--accent);
+        }
+        
+        .copyright {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .product-container {
+                flex-direction: column;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo"><img src="CeproNautica.png" alt=""></a>
+                <div class="nav-links">
+                    <a href="#features">Características</a>
+                    <a href="#product">O Barco</a>
+                    <a href="#testimonials">Depoimentos</a>
+                    <a href="#contact">Contato</a>
+                    <a href="#register">Cadastro</a>
+                    <a href="#customers">Clientes</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="hero-content">
+            <h1>CeproLancha</h1>
+            <p>A experiência definitiva em navegação de luxo</p>
+            <a href="#product" class="btn" style="margin-right: 1rem ;">Conheça o Barco</a>
+            <a href="#register" class="btn" style="margin-left: 1rem;">Cadastre-se</a>
+        </div>
+    </section>
+    
+    <section id="features" class="container">
+        <h2 class="section-title">Características Exclusivas</h2>
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">⚓</div>
+                <h3>Design Inovador</h3>
+                <p>Linhas aerodinâmicas e design moderno que combinam performance e elegância.</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🚤</div>
+                <h3>Alta Performance</h3>
+                <p>Motor de última geração que oferece potência e eficiência energética.</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🛋️</div>
+                <h3>Conforto Premium</h3>
+                <p>Interiores luxuosos com materiais de alta qualidade e acabamento impecável.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="product" class="product-showcase">
+        <div class="container">
+            <div class="product-container">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1585000962552-70f0a67223d9?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="CeproLancha">
+                </div>
+                <div class="product-details">
+                    <h2>CeproLancha 2025</h2>
+                    <p>A CeproLancha redefine o padrão de excelência náutica, combinando desempenho excepcional com luxo incomparável. Cada detalhe foi meticulosamente projetado para oferecer a experiência definitiva na água.</p>
+                    
+                    <div class="price">R$ 200.000,00</div>
+                    
+                    <a href="#register" class="btn">Solicitar Cotação</a>
+                    
+                    <div class="specs">
+                        <h3>Especificações Técnicas</h3>
+                        <div class="spec-item">
+                            <div class="spec-name">Comprimento</div>
+                            <div class="spec-value">8.5 metros</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-name">Largura</div>
+                            <div class="spec-value">2.8 metros</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-name">Peso</div>
+                            <div class="spec-value">1.850 kg</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-name">Motor</div>
+                            <div class="spec-value">V8 350HP</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-name">Capacidade</div>
+                            <div class="spec-value">8 pessoas</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-name">Combustível</div>
+                            <div class="spec-value">Gasolina</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Seção de Cadastro -->
+    <section id="register" class="container">
+        <div class="registration-form">
+            <h2 class="section-title">Cadastro de Cliente</h2>
+            <form id="customerForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nome">Nome Completo*</label>
+                        <input type="text" id="nome" name="nome" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="dataNascimento">Data de Nascimento*</label>
+                        <input type="date" id="dataNascimento" name="dataNascimento" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="cpf">CPF*</label>
+                        <input type="text" id="cpf" name="cpf" required placeholder="000.000.000-00">
+                    </div>
+                    <div class="form-group">
+                        <label for="cnpj">CNPJ (se aplicável)</label>
+                        <input type="text" id="cnpj" name="cnpj" placeholder="00.000.000/0000-00">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">E-mail*</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="telefone">Telefone*</label>
+                        <input type="tel" id="telefone" name="telefone" required placeholder="(00) 00000-0000">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="endereco">Endereço Completo*</label>
+                    <input type="text" id="endereco" name="endereco" required>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="cidade">Cidade*</label>
+                        <input type="text" id="cidade" name="cidade" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="estado">Estado*</label>
+                        <select id="estado" name="estado" required>
+                            <option value="">Selecione...</option>
+                            <option value="AC">Acre</option>
+                            <option value="AL">Alagoas</option>
+                            <option value="AP">Amapá</option>
+                            <option value="AM">Amazonas</option>
+                            <option value="BA">Bahia</option>
+                            <option value="CE">Ceará</option>
+                            <option value="DF">Distrito Federal</option>
+                            <option value="ES">Espírito Santo</option>
+                            <option value="GO">Goiás</option>
+                            <option value="MA">Maranhão</option>
+                            <option value="MT">Mato Grosso</option>
+                            <option value="MS">Mato Grosso do Sul</option>
+                            <option value="MG">Minas Gerais</option>
+                            <option value="PA">Pará</option>
+                            <option value="PB">Paraíba</option>
+                            <option value="PR">Paraná</option>
+                            <option value="PE">Pernambuco</option>
+                            <option value="PI">Piauí</option>
+                            <option value="RJ">Rio de Janeiro</option>
+                            <option value="RN">Rio Grande do Norte</option>
+                            <option value="RS">Rio Grande do Sul</option>
+                            <option value="RO">Rondônia</option>
+                            <option value="RR">Roraima</option>
+                            <option value="SC">Santa Catarina</option>
+                            <option value="SP">São Paulo</option>
+                            <option value="SE">Sergipe</option>
+                            <option value="TO">Tocantins</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="cep">CEP*</label>
+                        <input type="text" id="cep" name="cep" required placeholder="00000-000">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="interesse">Interesse Principal*</label>
+                    <select id="interesse" name="interesse" required>
+                        <option value="">Selecione...</option>
+                        <option value="compra">Compra</option>
+                        <option value="aluguel">Aluguel</option>
+                        <option value="financiamento">Financiamento</option>
+                        <option value="cotacao">Cotação</option>
+                        <option value="outro">Outro</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="mensagem">Mensagem ou Observações</label>
+                    <textarea id="mensagem" name="mensagem" rows="4"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <input type="checkbox" id="newsletter" name="newsletter">
+                    <label for="newsletter">Desejo receber newsletter e promoções</label>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn">Cadastrar</button>
+                </div>
+            </form>
+        </div>
+    </section>
+    
+    <!-- Seção de Visualização de Clientes -->
+    <section id="customers" class="admin-section container">
+        <h2 class="section-title">Clientes Cadastrados</h2>
+        <div class="customers-list">
+            <table class="customers-table">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>CPF/CNPJ</th>
+                        <th>E-mail</th>
+                        <th>Telefone</th>
+                        <th>Interesse</th>
+                    </tr>
+                </thead>
+                <tbody id="customersTableBody">
+                    <!-- Os dados dos clientes serão inseridos aqui via JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </section>
+    
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">O Que Dizem Nossos Clientes</h2>
+            <div class="testimonial-container">
+                <div class="testimonial">
+                    <p class="testimonial-text">"Comprei minha CeproLancha há 6 meses e superou todas as expectativas. eu fico toda kwaizinha japonezinha andando nela!"</p>
+                    <p class="testimonial-author">- Laysla silva, São Paulo</p>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial-text">"Atendimento excepcional e um produto de qualidade premium. Minha família adora nossos finais de semana no barco."</p>
+                    <p class="testimonial-author">- Mariana dores, Rio de Janeiro</p>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial-text">"Já tive vários barcos na vida, mas a CeproLancha está em outra categoria. Vale cada centavo investido, amei muito!"</p>
+                    <p class="testimonial-author">- Carlos Mendes, Florianópolis</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="contact" class="cta">
+        <div class="container">
+            <h2>Pronto para Viver a Experiência CeproLancha?</h2>
+            <p>Entre em contato conosco para agendar uma demonstração ou solicitar mais informações sobre a lancha dos seus sonhos.</p>
+            <a href="mailto:vendas@ceprolancha.com.br" class="btn">Fale Conosco</a>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>CeproLancha</h3>
+                <p>A marca líder em lanchas de alto padrão no Brasil.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Links Rápidos</h3>
+                <ul>
+                    <li><a href="#features">Características</a></li>
+                    <li><a href="#product">O Barco</a></li>
+                    <li><a href="#testimonials">Depoimentos</a></li>
+                    <li><a href="#contact">Contato</a></li>
+                    <li><a href="#register">Cadastro</a></li>
+                    <li><a href="#customers">Clientes</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contato</h3>
+                <ul>
+                    <li>Email: vendas@ceprolancha.com.br</li>
+                    <li>Telefone: (21) 1234-5678</li>
+                    <li>Endereço: Av. Beira Mar, 1000 - Rio de Janeiro</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 CeproLancha. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Armazenamento de clientes (simulado com localStorage)
+        document.addEventListener('DOMContentLoaded', function() {
+            // Inicializa o array de clientes se não existir
+            if (!localStorage.getItem('clientesCeproLancha')) {
+                localStorage.setItem('clientesCeproLancha', JSON.stringify([]));
+            }
+            
+            // Carrega os clientes para a tabela
+            carregarClientes();
+            
+            // Configura o formulário
+            const form = document.getElementById('customerForm');
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Coleta os dados do formulário
+                const cliente = {
+                    nome: document.getElementById('nome').value,
+                    dataNascimento: document.getElementById('dataNascimento').value,
+                    cpf: document.getElementById('cpf').value,
+                    cnpj: document.getElementById('cnpj').value,
+                    email: document.getElementById('email').value,
+                    telefone: document.getElementById('telefone').value,
+                    endereco: document.getElementById('endereco').value,
+                    cidade: document.getElementById('cidade').value,
+                    estado: document.getElementById('estado').value,
+                    cep: document.getElementById('cep').value,
+                    interesse: document.getElementById('interesse').value,
+                    mensagem: document.getElementById('mensagem').value,
+                    newsletter: document.getElementById('newsletter').checked,
+                    dataCadastro: new Date().toISOString()
+                };
+                
+                // Adiciona o cliente ao armazenamento
+                adicionarCliente(cliente);
+                
+                // Limpa o formulário
+                form.reset();
+                
+                // Mostra mensagem de sucesso
+                alert('Cadastro realizado com sucesso!');
+                
+                // Atualiza a tabela de clientes
+                carregarClientes();
+            });
+        });
+        
+        function adicionarCliente(cliente) {
+            const clientes = JSON.parse(localStorage.getItem('clientesCeproLancha'));
+            clientes.push(cliente);
+            localStorage.setItem('clientesCeproLancha', JSON.stringify(clientes));
+        }
+        
+        function carregarClientes() {
+            const clientes = JSON.parse(localStorage.getItem('clientesCeproLancha'));
+            const tableBody = document.getElementById('customersTableBody');
+            
+            // Limpa a tabela
+            tableBody.innerHTML = '';
+            
+            // Adiciona cada cliente à tabela
+            clientes.forEach(cliente => {
+                const row = document.createElement('tr');
+                
+                // Formata CPF/CNPJ
+                const documento = cliente.cnpj ? cliente.cnpj : cliente.cpf;
+                
+                row.innerHTML = `
+                    <td>${cliente.nome}</td>
+                    <td>${documento}</td>
+                    <td>${cliente.email}</td>
+                    <td>${cliente.telefone}</td>
+                    <td>${formatarInteresse(cliente.interesse)}</td>
+                `;
+                
+                tableBody.appendChild(row);
+            });
+        }
+        
+        function formatarInteresse(interesse) {
+            const interesses = {
+                'compra': 'Compra',
+                'aluguel': 'Aluguel',
+                'financiamento': 'Financiamento',
+                'cotacao': 'Cotação',
+                'outro': 'Outro'
+            };
+            
+            return interesses[interesse] || interesse;
+        }
+    </script>
+</body>
+</html>
